@@ -1,0 +1,86 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
+
+PATH: 
+  C:\Users\allen\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\allen\bin;C:\Program Files (x86)\NetSarang\Xftp 6;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Program Files (x86)\Yarn\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH;D:\manong\apache-maven-3.6.0\bin;D:\manong\apache-maven-3.6.0\bin;C:\Program Files\Java\jdk1.8.0_111\bin;C:\Program Files\Java\jre1.8.0_111\bin;C:\Program Files\Redis;C:\Program Files\nodejs;D:\mysql-8.0.15-winx64\bin;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Users\allen\AppData\Local\Yarn\bin;C:\Users\allen\AppData\Local\Microsoft\WindowsApps;C:\Users\allen\AppData\Roaming\npm;C:\Users\allen\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.9.4
+
+Node version: 
+  10.11.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: connect ETIMEDOUT 104.16.16.35:443
+      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1113:14)
+
+npm manifest: 
+  {
+    "name": "examSystem-node",
+    "version": "1.0.0",
+    "description": "考系统node实现",
+    "private": true,
+    "egg": {
+      "typescript": true,
+      "declarations": true
+    },
+    "scripts": {
+      "start": "egg-scripts start --daemon --title=egg-server-examSystem-node",
+      "stop": "egg-scripts stop --title=egg-server-examSystem-node",
+      "dev": "egg-bin dev",
+      "debug": "egg-bin debug",
+      "test-local": "egg-bin test",
+      "test": "npm run lint -- --fix && npm run test-local",
+      "cov": "egg-bin cov",
+      "tsc": "ets && tsc -p tsconfig.json",
+      "ci": "npm run lint && npm run cov && npm run tsc",
+      "autod": "autod",
+      "lint": "tslint --project . -c tslint.json",
+      "clean": "ets clean"
+    },
+    "dependencies": {
+      "egg": "^2.6.1",
+      "egg-scripts": "^2.6.0",
+      "egg-sequelize": "^4.3.1",
+      "mysql2": "^1.6.5",
+      "sequelize-cli": "^5.4.0"
+    },
+    "devDependencies": {
+      "@types/mocha": "^2.2.40",
+      "@types/node": "^7.0.12",
+      "@types/supertest": "^2.0.0",
+      "autod": "^3.0.1",
+      "autod-egg": "^1.1.0",
+      "egg-bin": "^4.11.0",
+      "egg-ci": "^1.8.0",
+      "egg-mock": "^3.16.0",
+      "tslib": "^1.9.0",
+      "tslint": "^5.0.0",
+      "tslint-config-egg": "^1.0.0",
+      "typescript": "^3.0.0"
+    },
+    "engines": {
+      "node": ">=8.9.0"
+    },
+    "ci": {
+      "version": "8"
+    },
+    "repository": {
+      "type": "git",
+      "url": ""
+    },
+    "eslintIgnore": [
+      "coverage"
+    ],
+    "author": "zhj",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

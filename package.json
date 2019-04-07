@@ -1,7 +1,7 @@
 {
   "name": "examSystem-node",
   "version": "1.0.0",
-  "description": "考系统node实现",
+  "description": "考试系统node实现",
   "private": true,
   "egg": {
     "typescript": true,

@@ -4,5 +4,5 @@ export default (app: Application) => {
   const { controller, router } = app;
 
   router.get('/', controller.home.index);
-  router.get('/users', controller.user.users);
+  router.get('/users', controller.user.index);
 };
