@@ -2,7 +2,6 @@ import { Controller } from 'egg';
 
 // app/controller/users.js
 
-
 function toInt(str) {
   if (typeof str === 'number') return str;
   if (!str) return str;

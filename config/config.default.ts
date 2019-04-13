@@ -3,16 +3,16 @@ import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<EggAppConfig>;
   config.sequelize = {
-    
-      host: '127.0.0.1',
-      port: '3306',
-      user: 'root',
-      password: '123456',
-      database: 'examsystem'
-    
+
+    host: '127.0.0.1',
+    port: '3306',
+    user: 'root',
+    password: '123456',
+    database: 'examsystem',
+
     // app: true,
     // agent: false,
-    // define: { underscored: true, }
+    define: { underscored: true, }
   };
 
   // override config from framework / plugin
