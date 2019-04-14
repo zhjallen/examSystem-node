@@ -9,18 +9,23 @@ function toInt(str) {
 }
 
 class QuestionController extends Controller {
-  async index() {
+  async getQuestionList() {
     const ctx = this.ctx;
-    const query = { limit: toInt(ctx.query.limit), offset: toInt(ctx.query.offset) };
-    ctx.body = await ctx.model.Question.findAll(query);
+    // const query = { limit: toInt(ctx.query.limit), offset: toInt(ctx.query.offset) };
+    ctx.body = await ctx.service.question.getQuestionList();
   }
 
   async show() {
     const ctx = this.ctx;
     ctx.body = await ctx.model.Question.findById(toInt(ctx.params.id));
   }
+  async addQuestion() {
+    const { ctx } = this;
+    ctx.status = 201;
+    ctx.body = await ctx.service.question.addQuestion();
+  }
 
-  
+
 }
 
 module.exports = QuestionController;

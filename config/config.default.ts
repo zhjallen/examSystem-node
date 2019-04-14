@@ -7,14 +7,16 @@ export default (appInfo: EggAppInfo) => {
     host: '127.0.0.1',
     port: '3306',
     user: 'root',
-    password: '123456',
+    password: 'password',
     database: 'examsystem',
 
     // app: true,
     // agent: false,
     define: { underscored: true, }
   };
-
+  config.security = {
+    csrf: false,
+  }
   // override config from framework / plugin
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1554102921593_8556';
