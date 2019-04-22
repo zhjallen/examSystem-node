@@ -16,6 +16,7 @@ module.exports = app => {
         status:INTEGER, // 状态
         created_at: DATE,
         updated_at: DATE,
+        
     });
 
     return Question;
