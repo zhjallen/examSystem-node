@@ -9,16 +9,15 @@ function toInt(str) {
 }
 
 class UserController extends Controller {
- 
+
 
   async userList() {
     const ctx = this.ctx;
-    ctx.body = await ctx.service.user.getUserList();
-  }
-  async getQuestionList() {
-    const ctx = this.ctx;
-    // const query = { limit: toInt(ctx.query.limit), offset: toInt(ctx.query.offset) };
-    ctx.body = await ctx.service.question.getQuestionList();
+    const userObj = await ctx.service.user.getUserList();
+    ctx.body = {
+      total: userObj.count,
+      users: userObj.rows,
+    }
   }
 
   async addUser() {
@@ -30,7 +29,6 @@ class UserController extends Controller {
   public async login() {
     const { ctx } = this;
     const user = await ctx.service.user.login();
-    console.log(user,"user")
     if (user) {
       ctx.body = user;
       ctx.status = 200;
@@ -40,31 +38,20 @@ class UserController extends Controller {
     }
 
   }
-  async update() {
-    const ctx = this.ctx;
-    const id = toInt(ctx.params.id);
-    const user = await ctx.model.User.findById(id);
-    if (!user) {
-      ctx.status = 404;
-      return;
-    }
-
-    const { name, age } = ctx.request.body;
-    await user.update({ name, age });
-    ctx.body = user;
+  public async delUser() {
+    const { ctx } = this;
+    ctx.body = await ctx.service.user.delUser();
   }
-
-  async destroy() {
+  async updateUser() {
     const ctx = this.ctx;
-    const id = toInt(ctx.params.id);
+    const id = toInt(ctx.params.userId);
     const user = await ctx.model.User.findById(id);
     if (!user) {
       ctx.status = 404;
       return;
     }
+    ctx.body = await ctx.service.user.updateUser();
 
-    await user.destroy();
-    ctx.status = 200;
   }
 }
 
