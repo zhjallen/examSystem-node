@@ -2,11 +2,11 @@ import { Controller } from 'egg';
 
 // app/controller/users.js
 
-function toInt(str) {
-  if (typeof str === 'number') return str;
-  if (!str) return str;
-  return parseInt(str, 10) || 0;
-}
+// function toInt(str) {
+//   if (typeof str === 'number') return str;
+//   if (!str) return str;
+//   return parseInt(str, 10) || 0;
+// }
 
 class QuestionController extends Controller {
   async getQuestionList() {
@@ -21,8 +21,18 @@ class QuestionController extends Controller {
 
   async getQuestionById() {
     const ctx = this.ctx;
-
-    ctx.body = await ctx.model.Question.findById(toInt(ctx.params.id));
+    const { id } = ctx.params;
+    if (!id) {
+      ctx.status = 400;
+      ctx.body = {
+        message: "缺少试题id",
+        data: "eeeee"
+      }
+      return;
+    } else {
+      ctx.body = await ctx.service.question.getQuestionById(id);
+    }
+   
   }
   async addQuestion() {
     const { ctx } = this;
