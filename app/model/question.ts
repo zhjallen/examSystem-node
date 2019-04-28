@@ -21,7 +21,12 @@ module.exports = app => {
             type: INTEGER,
 
         },
-        isdel: {
+        answerKey: {
+            type: STRING(255),
+            field: "answer_key",
+            comment: "答案解析"
+        },
+        isDel: {
             type: INTEGER,
             field: "is_del",
             comment: "0 未删除 1 删除"

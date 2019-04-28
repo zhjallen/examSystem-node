@@ -26,7 +26,7 @@ export default class Question extends Service {
         if (difficulty) {
             whereObj["difficulty"] = Number(difficulty);
         }
-        const questionsObj = ctx.model.Question.findAndCount(
+        const questionsObj = ctx.model.Question.findAndCountAll(
             {
                 limit: Number(pageSize), offset: offset, order: [
                     ["created_at", "DESC"]
@@ -45,7 +45,6 @@ export default class Question extends Service {
         const { ctx } = this;
         const questionInfo = ctx.request.body;
         const { basicInfo, options } = questionInfo;
-        console.log(questionInfo, "info")
         let t1;
         try {
             t1 = await ctx.model.transaction();
@@ -67,7 +66,6 @@ export default class Question extends Service {
         } catch (err) {
             ctx.logger.error(err);
             t1.rollback();
-            console.log(t1, "tttttttt")
         }
         // const question = ctx.model.Question.create(questionInfo);
         // return question;
@@ -75,9 +73,8 @@ export default class Question extends Service {
     public async delQuestionById(id) {
         const { ctx } = this;
 
-        const questinObj = ctx.model.Question.update({ is_del: 0 }, {
-            fields: ["is_del"],
-            
+        const questinObj = ctx.model.Question.update({ isDel: 1}, {
+            fields: ["isDel" ],
             where: {
                 id: id
             }
@@ -86,13 +83,13 @@ export default class Question extends Service {
     }
     public async getQuestionById(id) {
         const { ctx } = this;
-        const questinObj = ctx.model.Question.findById(id,{
+        const questinObj = ctx.model.Question.findById(id, {
             include: [{
                 model: ctx.model.QuestionOption,
                 as: "options"
             }
             ],
-            
+
         });
         return questinObj;
     }
