@@ -10,13 +10,13 @@ import { Controller } from 'egg';
 
 class TestController extends Controller {
   async getTestList() {
-    // const ctx = this.ctx;
+    const ctx = this.ctx;
     // const query = { limit: toInt(ctx.query.limit), offset: toInt(ctx.query.offset) };
-    // const questionsObj = await ctx.service.question.getQuestionList();
-    // ctx.body = {
-    //   total: questionsObj.count,
-    //   questions: questionsObj.rows,
-    // }
+    const testsObj = await ctx.service.test.getTestList();
+    ctx.body = {
+      total: testsObj.count,
+      tests: testsObj.rows,
+    }
   }
 
   async getTestById() {
@@ -32,12 +32,12 @@ class TestController extends Controller {
     } else {
       ctx.body = await ctx.service.question.getQuestionById(id);
     }
-   
+
   }
   async addTest() {
     const { ctx } = this;
-    ctx.status = 201;
-    ctx.body = await ctx.service.question.addQuestion();
+    // ctx.status = 201;
+    ctx.body = await ctx.service.test.addTest();
   }
   public async delTestId() {
     const { ctx } = this;

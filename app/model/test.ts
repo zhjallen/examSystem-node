@@ -73,6 +73,7 @@ module.exports = app => {
         // },
         isDel: {
             type: INTEGER,
+            defaultValue: 0,
             field: "is_del",
             comment: "0 未删除 1 删除"
         }, // 是否删除（0 删除，1 未删除）
@@ -102,6 +103,6 @@ module.exports = app => {
     //     // 这里如果一个模型和多个模型都有关联关系的话，关联关系需要统一定义在这里
     // };
 
-    // Test.sync({ force: true });
+    //Test.sync({ force: true });
     return Test;
 };
