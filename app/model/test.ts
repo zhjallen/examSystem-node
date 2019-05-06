@@ -66,11 +66,10 @@ module.exports = app => {
             type: INTEGER,
             comment: "创建人id"
         },
-        // answerKey: {
-        //     type: STRING(255),
-        //     field: "answer_key",
-        //     comment: "答案解析"
-        // },
+        remark: {
+            type: STRING(255),
+            comment: "备注"
+        },
         isDel: {
             type: INTEGER,
             defaultValue: 0,
