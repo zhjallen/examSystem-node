@@ -8,7 +8,7 @@ export default class Test extends Service {
 
   public async getTestList() {
     const { ctx } = this;
-    const { page, pageSize, name } = ctx.query;
+    const { page, pageSize, name, status } = ctx.query;
     let offset = 0;
     if (pageSize > 0) {
       offset = Number(page - 1) * Number(pageSize);
@@ -19,9 +19,9 @@ export default class Test extends Service {
       },
       is_del: 0
     }
-    // if (type) {
-    //     whereObj["type"] = Number(type);
-    // }
+    if (status !== undefined) {
+      whereObj["status"] = Number(status);
+    }
     // if (difficulty) {
     //     whereObj["difficulty"] = Number(difficulty);
     // }
