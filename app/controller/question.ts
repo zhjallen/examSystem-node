@@ -9,6 +9,11 @@ import { Controller } from 'egg';
 // }
 
 class QuestionController extends Controller {
+  /**
+   * 获取试题列表
+   *
+   * @memberof QuestionController
+   */
   async getQuestionList() {
     const ctx = this.ctx;
     // const query = { limit: toInt(ctx.query.limit), offset: toInt(ctx.query.offset) };
