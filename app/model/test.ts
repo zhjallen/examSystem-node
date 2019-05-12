@@ -1,7 +1,7 @@
 'use strict';
-// const QuestionOption = require("./questionOption");
+const TestContent = require("./testContent");
 /**
- * 试题
+ * 考试
  *
  * @param {*} app
  * @returns
@@ -87,21 +87,21 @@ module.exports = app => {
             tableName: 'tests',
             comment: "考试"
         });
-    // Question.associate = () => {
-    //     // 定义多对多关联
-    //     Question.hasMany(app.model.QuestionOption, {
-    //         // 中间表的model
-    //         // through: app.model.groupUser,
-    //         // 进行关联查询时，关联表查出来的数据模型的alias
-    //         as: 'options',
-    //         // 是否采用外键进行物理关联
-    //         constraints: true,
-    //         foreignKey: 'question_id', targetKey: 'id'
+    Test.associate = () => {
+        // 定义多对多关联
+        Test.hasMany(app.model.TestContent, {
+            // 中间表的model
+            // through: app.model.groupUser,
+            // 进行关联查询时，关联表查出来的数据模型的alias
+            as: 'contents',
+            // 是否采用外键进行物理关联
+            constraints: true,
+            foreignKey: 'test_id', targetKey: 'id'
 
-    //     });
-    //     // 这里如果一个模型和多个模型都有关联关系的话，关联关系需要统一定义在这里
-    // };
+        });
+        // 这里如果一个模型和多个模型都有关联关系的话，关联关系需要统一定义在这里
+    };
 
-    //Test.sync({ force: true });
+   // Test.sync({ force: true });
     return Test;
 };
