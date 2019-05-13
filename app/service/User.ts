@@ -7,7 +7,7 @@ export default class User extends Service {
 
     public async getUserList() {
         const { ctx } = this;
-        const { page, pageSize, name, username } = ctx.query;
+        const { page, pageSize, name, userName } = ctx.query;
         let offset = 0;
 
         if (pageSize > 0) {
@@ -15,14 +15,14 @@ export default class User extends Service {
         }
         const users = ctx.model.User.findAndCountAll({
             limit: Number(pageSize), offset: offset, order: [
-                ["created_at", "DESC"]
+                ["createdAt", "DESC"]
             ],
             where: {
                 name: {
                     $like: `%${name || ""}%`
                 },
-                username: {
-                    $like: `%${username || ""}%`
+                userName: {
+                    $like: `%${userName || ""}%`
                 }
             },
         });
@@ -31,16 +31,21 @@ export default class User extends Service {
     }
     public async login() {
         const { ctx } = this;
-        const { password, username, type } = ctx.query;
-        const user = ctx.model.User.findOne({ where: { username, password, type } });
+        const { password, userName, type } = ctx.query;
+        const user = ctx.model.User.findOne({ where: { userName, password, type } });
         return user;
     }
     public async addUser() {
         const { ctx } = this;
         const userInfo = ctx.request.body;
-        console.log(userInfo, "info")
-        const user = ctx.model.User.create(userInfo);
-        return user;
+        try {
+            const user = ctx.model.User.create(userInfo);
+            
+            return user;
+        } catch (error) {
+        }
+
+
     }
     public async delUser() {
         const { ctx } = this;

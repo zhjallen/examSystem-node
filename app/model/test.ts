@@ -1,5 +1,7 @@
 'use strict';
 const TestContent = require("./testContent");
+const User = require("./user");
+const TestUser = require("./test-user");
 /**
  * 考试
  *
@@ -88,7 +90,7 @@ module.exports = app => {
             comment: "考试"
         });
     Test.associate = () => {
-        // 定义多对多关联
+        // test与testContent 是一对多关系
         Test.hasMany(app.model.TestContent, {
             // 中间表的model
             // through: app.model.groupUser,
@@ -99,9 +101,15 @@ module.exports = app => {
             foreignKey: 'test_id', targetKey: 'id'
 
         });
+        // test与user是多对多关系
+        Test.belongsToMany(app.model.User, {
+            through: app.model.TestUser,
+            foreignKey: 'testId',
+            otherKey: 'userId'
+        })
         // 这里如果一个模型和多个模型都有关联关系的话，关联关系需要统一定义在这里
     };
 
-   // Test.sync({ force: true });
+    // Test.sync({ force: true });
     return Test;
 };

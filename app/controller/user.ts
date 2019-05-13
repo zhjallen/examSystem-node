@@ -22,9 +22,21 @@ class UserController extends Controller {
 
   async addUser() {
     const ctx = this.ctx;
-    const user = await ctx.service.user.addUser();
-    // ctx.status = 201;
-    ctx.body = user;
+    try {
+      const user = await ctx.service.user.addUser();
+      ctx.body = user;
+    } catch (error) {
+      ctx.status = 500;
+      if (error.errors[0].message === "user_name must be unique") {
+        ctx.body = {
+          message: "用户名不能重复"
+        }
+      }
+      // ctx.body = error
+      // ctx.message = "发生错误"
+    }
+
+
   }
   public async login() {
     const { ctx } = this;
