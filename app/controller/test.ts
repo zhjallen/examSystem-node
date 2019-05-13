@@ -13,10 +13,7 @@ class TestController extends Controller {
     const ctx = this.ctx;
     // const query = { limit: toInt(ctx.query.limit), offset: toInt(ctx.query.offset) };
     const testsObj = await ctx.service.test.getTestList();
-    ctx.body = {
-      total: testsObj.count,
-      tests: testsObj.rows,
-    }
+    ctx.body = testsObj;
   }
 
   async getTestById() {

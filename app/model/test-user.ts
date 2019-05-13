@@ -35,6 +35,6 @@ module.exports = app => {
             comment: "考试内容"
         });
 
-   // TestUser.sync({ force: true });
+//    TestUser.sync({ force: true });
     return TestUser;
 };

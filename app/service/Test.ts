@@ -25,33 +25,64 @@ export default class Test extends Service {
     // if (difficulty) {
     //     whereObj["difficulty"] = Number(difficulty);
     // }
-    const testsObj = ctx.model.Test.findAndCountAll(
+    const tests =await ctx.model.Test.findAll(
       {
         limit: Number(pageSize), offset: offset, order: [
           ["created_at", "DESC"]
         ],
-        // include: [{
-        //     model: ctx.model.QuestionOption,
-        //     as: "options"
-        // }
-        // ],
+        include: [
+          {
+            model: ctx.model.User,
+            attributes: ['id'],
+            // where: { completed: true }
+          }
+        ],
         where: whereObj
       }
     );
-    return testsObj;
+    const count = await ctx.model.Test.count({
+      where: whereObj,
+    });
+    return {
+      tests,
+      count
+    };
+    // const reselt=ctx.model.query("select *")
+
   }
   public async addTest() {
     const { ctx } = this;
     const { testInfo } = ctx.request.body;
     let testResult;
+    const t = await ctx.model.transaction();
     try {
-      testResult = ctx.model.Test.create(testInfo)
+
+      testResult = await ctx.model.Test.create(testInfo, {
+        transaction: t
+      })
+      const testId = testResult && testResult.id;
+      if (!testId) {
+        throw new Error("创建考试失败");
+      }
+      let test_users = [];
+      if (testInfo.users && testInfo.users.length > 0) {
+        test_users = await ctx.model.TestUser.bulkCreate(testInfo.users.map(user => {
+          return {
+            userId: user.id,
+            testId: testId
+          }
+        }), {
+            transaction: t
+          })
+      }
+      await t.commit();
+      return { testResult, test_users }
     } catch (err) {
       ctx.logger.error(err);
-      // t1.rollback();
+      t.rollback();
     }
     // const question = ctx.model.Question.create(questionInfo);
-    return testResult;
+    // return testResult;
   }
 
 }

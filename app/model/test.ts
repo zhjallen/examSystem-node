@@ -98,7 +98,7 @@ module.exports = app => {
             as: 'contents',
             // 是否采用外键进行物理关联
             constraints: true,
-            foreignKey: 'test_id', targetKey: 'id'
+            foreignKey: 'testId', targetKey: 'id'
 
         });
         // test与user是多对多关系

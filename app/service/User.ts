@@ -7,7 +7,7 @@ export default class User extends Service {
 
     public async getUserList() {
         const { ctx } = this;
-        const { page, pageSize, name, userName } = ctx.query;
+        const { page, pageSize, name, userName, type } = ctx.query;
         let offset = 0;
 
         if (pageSize > 0) {
@@ -23,6 +23,9 @@ export default class User extends Service {
                 },
                 userName: {
                     $like: `%${userName || ""}%`
+                },
+                type: {
+                    $like: `%${type || ""}%`
                 }
             },
         });
@@ -40,7 +43,7 @@ export default class User extends Service {
         const userInfo = ctx.request.body;
         try {
             const user = ctx.model.User.create(userInfo);
-            
+
             return user;
         } catch (error) {
         }
